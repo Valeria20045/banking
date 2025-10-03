@@ -5,8 +5,11 @@ from django.db import models
 class Countries(models.Model):
     name = models.CharField(max_length=20)
     abrev = models.CharField(max_length=5)
+    status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f"{self.name} {self.abrev}{'Activate' if self.status else 'inactive'}"
 
 class Department(models.Model):
     name = models.CharField(max_length=30)
@@ -15,6 +18,9 @@ class Department(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+    #def __str__(self):
+    #    return f"{self.name} {self.abrev}"
+     
 
 class Cities(models.Model):
     name = models.CharField(max_length=30)
@@ -24,8 +30,9 @@ class Cities(models.Model):
     abrev = models.TextField(max_length=5)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
+    #def __str__(self):
+     #   return f"{self.name} {self.abrev}"
+   
 class User(models.Model):
     firstname = models.CharField(max_length=20)
     lastname = models.CharField(max_length=20, blank=True)
